@@ -10,6 +10,7 @@ export default function Header(){
         <Fragment>
         <p>Hola: {name}</p>
         <p>Total a pagar : {total} </p>
+        
         </Fragment>
     )
 } 
