@@ -1,4 +1,4 @@
-import {Fragment} from 'react'
+
 
 export default function Header(){
 
@@ -7,11 +7,11 @@ export default function Header(){
 
 
     return(
-        <Fragment>
+        <>
         <p>Hola: {name}</p>
         <p>Total a pagar : {total} </p>
         
-        </Fragment>
+        </>
     )
 } 
 
