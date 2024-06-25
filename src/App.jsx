@@ -1,12 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Header from "./Components/Header"
 import Guitar from "./Components/Guitar"
+import { db } from "./data/db"
+
 function App() {
-  //definicion del state
-  const[auth, setAuth] = useState(false)
- 
+ const [data , setData] = useState(db)
+  
 
+/*
+es una manera de hacero desde una api
+useEffect(() => {
+  setData(db)
+}, [])
 
+*/
   return (
     <>
 
@@ -17,9 +24,15 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
             <div className="row mt-5">
-            <Guitar/>
-            <Guitar/>
-            <Guitar/>
+              
+              {data.map(() => (
+
+                <Guitar/>
+
+              )
+            )}
+
+
             
 
              </div>
