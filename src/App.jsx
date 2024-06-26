@@ -7,6 +7,20 @@ function App() {
  const [data , setData] = useState(db)
  const [cart, setCart]= useState([])
 
+
+ function addToCart(item){
+
+  const itemExist = cart.findIndex((guitar)=> guitar.id === item.id)
+  if(itemExist >=0){
+    console.log('Ya extiste...')
+  }else {
+    item.quantity = 1
+    setCart (prevCart => [...prevCart,item])
+  }
+
+  
+
+    }
 /*
 es una manera de hacero desde una api
 useEffect(() => {
@@ -28,10 +42,10 @@ useEffect(() => {
             {data.map((guitar) => (
 
                 <Guitar
-                key={guitar.id}
+                  key={guitar.id}
                   guitar={guitar}
-                  cart={cart}
                   setCart={setCart}
+                  addToCart={addToCart}
                   
                 />
             ))}
