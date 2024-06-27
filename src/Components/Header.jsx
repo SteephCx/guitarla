@@ -1,8 +1,13 @@
 
+import {useMemo} from 'react'
 export default function Header({ cart }) {
 
     //State derivado
-    const isEmpty = () => cart.length === 0
+    //lo que hace useMemo es que evita que mi codigo se renderice completamente y espera la instrccion de una funcion para ejecutarse
+    const isEmpty = useMemo( () => cart.length === 0, [cart])
+
+    //Sumatorio del precio del carrito
+    const cartTotal = () => cart.reduce ((total, item) => total + (item.quantity * item.price), 0)
 
     return (
         <>
@@ -23,7 +28,7 @@ export default function Header({ cart }) {
                                 <img className="img-fluid" src="./public/img/carrito.png" alt="imagen carrito" />
 
                                 <div id="carrito" className="bg-white p-3">
-                                    {isEmpty() ? (
+                                    {isEmpty ? (
                                         <p className="text-center">El carrito esta vacio</p>
                                     ) : (
                                      <>
@@ -76,7 +81,7 @@ export default function Header({ cart }) {
                                                 </table>
 
                                                 <p className="text-end">Total pagar: <span
-                                                className="fw-bold">$899</span></p>
+                                                className="fw-bold">${cartTotal()}</span></p>
                                         </>
                                     )}
 

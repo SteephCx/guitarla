@@ -3,6 +3,7 @@ import Header from "./Components/Header"
 import Guitar from "./Components/Guitar"
 import { db } from "./data/db"
 
+
 function App() {
  const [data , setData] = useState(db)
  const [cart, setCart]= useState([])
