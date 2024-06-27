@@ -7,7 +7,7 @@ export default function Header({ cart }) {
     const isEmpty = useMemo( () => cart.length === 0, [cart])
 
     //Sumatorio del precio del carrito
-    const cartTotal = () => cart.reduce ((total, item) => total + (item.quantity * item.price), 0)
+    const cartTotal = useMemo( () => cart.reduce ((total, item) => total + (item.quantity * item.price), 0), [cart])
 
     return (
         <>
@@ -81,7 +81,7 @@ export default function Header({ cart }) {
                                                 </table>
 
                                                 <p className="text-end">Total pagar: <span
-                                                className="fw-bold">${cartTotal()}</span></p>
+                                                className="fw-bold">${cartTotal}</span></p>
                                         </>
                                     )}
 
