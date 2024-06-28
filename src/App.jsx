@@ -19,9 +19,10 @@ function App() {
     item.quantity = 1
     setCart (prevCart => [...cart,item])
   }
+    }
 
-  
-
+    function removeFromCart(){
+      console.log('Eliminando...')
     }
 /*
 es una manera de hacero desde una api
@@ -33,9 +34,10 @@ useEffect(() => {
   return (
     <>
 
-      
+  
       <Header
        cart={cart}
+       removeFromCart={removeFromCart}
        />
      
     <main className="container-xl mt-5">
