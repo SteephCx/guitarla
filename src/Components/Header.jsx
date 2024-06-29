@@ -1,6 +1,6 @@
 
 import {useMemo} from 'react'
-export default function Header({ cart }) {
+export default function Header({ cart, removeFromCart }) {
 
     //State derivado
     //lo que hace useMemo es que evita que mi codigo se renderice completamente y espera la instrccion de una funcion para ejecutarse
@@ -71,6 +71,7 @@ export default function Header({ cart }) {
                                                                     <button
                                                                         className="btn btn-danger"
                                                                         type="button"
+                                                                        onClick={() => removeFromCart(guitar.id)}
                                                                     >
                                                                         X
                                                                     </button>
