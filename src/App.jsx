@@ -22,7 +22,7 @@ function App() {
     }
 
     function removeFromCart(id){
-      setCart(() => prevCart.filter(guitar => guitar.id !== id))
+      setCart(prevCart => prevCart.filter(guitar => guitar.id !== id))
     }
 /*
 es una manera de hacero desde una api
