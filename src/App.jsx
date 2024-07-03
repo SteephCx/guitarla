@@ -1,83 +1,13 @@
-import { useEffect, useState } from "react"
 import Header from "./Components/Header"
 import Guitar from "./Components/Guitar"
-import { db } from "./data/db"
+import {useCart} from './hooks/useCart'
 
 
 function App() {
- const initialCart = () => {
-  const localStorageCart = localStorage.getItem('cart')
-  return localStorageCart ? JSON.parse(localStorageCart) : []
- }
+
+  const { data,cart,addToCart,removeFromCart,decrementQuantity,increaseQuantity,
+    clearCart, isEmpty,cartTotal} = useCart()
  
- const [data] = useState(db)
- const [cart, setCart]= useState(initialCart)
-
- const MAX_ITEMS = 5 
- const MIN_ITEMS = 1 
-
- useEffect(()=> {
- localStorage.setItem('cart',JSON.stringify(cart))
- }, [cart])
-
-
- function addToCart(item){
-  const itemExists = cart.findIndex((guitar)=> guitar.id === item.id)
-  if(itemExists >=0){
-    if(cart[itemExists].quantity >= MAX_ITEMS) return
-    const updatedCart = [...cart]
-    updatedCart[itemExists].quantity++
-    setCart(updatedCart)
-  }else {
-    item.quantity = 1
-    setCart (prevCart => [...cart,item])
-  }
-    }
-
-    function removeFromCart(id){
-      setCart(prevCart => prevCart.filter(guitar => guitar.id !== id))
-    }
-/*
-es una manera de hacero desde una api
-useEffect(() => {
-  setData(db)
-}, [])
-
-*/
-
-function increaseQuantity(id){
-  const updatedCart = cart.map(item => {
-    if(item.id === id && item.quantity < MAX_ITEMS){
-      return {
-        ...item,
-        quantity: item.quantity + 1
-      }
-    }
-    return item
-  })
-  setCart(updatedCart)
-}
-
-
-function decrementQuantity(id){
-  const updatedCart = cart.map(item =>{
-    if(item.id==id && item.quantity > MIN_ITEMS){
-      return{
-        ...item,
-        quantity: item.quantity - 1
-      }
-    }
-    return item 
-  })
-  setCart(updatedCart)
-}
-
-function clearCart(e){
-  setCart([])
-}
-
-
-
   return (
     <>
 
@@ -88,6 +18,8 @@ function clearCart(e){
        increaseQuantity={increaseQuantity}
        decrementQuantity={decrementQuantity}
        clearCart={clearCart}
+       isEmpty = {isEmpty}
+       cartTotal = {cartTotal}
       />
      
     <main className="container-xl mt-5">
@@ -100,7 +32,6 @@ function clearCart(e){
                 <Guitar
                   key={guitar.id}
                   guitar={guitar}
-                  setCart={setCart}
                   addToCart={addToCart}
                   
                 />
